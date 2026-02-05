@@ -38,8 +38,9 @@ public class UserController : ControllerBase
 
             UserDTO user = new UserDTO
             {
-                Username = name,
-                Id = id
+                Name = name,
+                Id = id,
+                Email = email
             };
 
             //adicionar na minha lsita de usuários
@@ -50,7 +51,7 @@ public class UserController : ControllerBase
         return Ok(users);
     }
 
-    [HttpGet("{id}", Name = "GetUserById")]
+    [HttpGet("{id}")]
     public async Task<IActionResult> GetUser(Guid id)
     {
         try
@@ -70,7 +71,7 @@ public class UserController : ControllerBase
             {
                 UserDTO userObj = new UserDTO {
                     Id = reader.GetGuid(0).ToString(),
-                    Username = reader.GetString(1),
+                    Name = reader.GetString(1),
                 };
 
                 return Ok(userObj);
@@ -84,7 +85,7 @@ public class UserController : ControllerBase
         }
     }
     
-    [HttpPost(Name = "PostUserController")]
+    [HttpPost()]
     public async Task<IActionResult> PostUserController([FromBody] CreateUserDTO user)
     {
         var connString = "Host=localhost;Port=5432;Username=postgres;Password=root;Database=pedidos";
@@ -107,6 +108,56 @@ public class UserController : ControllerBase
 
         await cmd.ExecuteNonQueryAsync();
         return Created("", null);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutUserController([FromRoute] Guid id, [FromBody] CreateUserDTO user)
+    {
+        var connString = "Host=localhost;Port=5432;Username=postgres;Password=root;Database=pedidos";
+
+        var conn = new NpgsqlConnection(connString);
+        await conn.OpenAsync();
+
+        await using var cmd = conn.CreateCommand();
+
+        var sql = """
+        UPDATE tb_user
+        SET Name = @name,
+            Email = @email
+        WHERE Id = @id;
+        """;
+
+        cmd.CommandText = sql;
+        cmd.Parameters.AddWithValue("id", id);
+        cmd.Parameters.AddWithValue("name", user.Nome);
+        cmd.Parameters.AddWithValue("email", user.Email);
+
+        var affected = await cmd.ExecuteNonQueryAsync();
+
+        return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUserController([FromRoute] Guid id)
+    {
+        var connString = "Host=localhost;Port=5432;Username=postgres;Password=root;Database=pedidos";
+
+        var conn = new NpgsqlConnection(connString);
+        await conn.OpenAsync();
+
+        await using var cmd = conn.CreateCommand();
+
+        string sql = """
+        DELETE FROM tb_user
+        WHERE Id = @id;
+        """;
+
+        cmd.CommandText = sql;
+        cmd.Parameters.AddWithValue("id", id);
+
+        await cmd.ExecuteNonQueryAsync();
+
+        return Ok();
     }
 
 }

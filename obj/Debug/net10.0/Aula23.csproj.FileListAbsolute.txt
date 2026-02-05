@@ -32,3 +32,4 @@ C:\Users\cgach\Projetos\rdi\Aula23\obj\Debug\net10.0\Aula23.pdb
 C:\Users\cgach\Projetos\rdi\Aula23\obj\Debug\net10.0\Aula23.genruntimeconfig.cache
 C:\Users\cgach\Projetos\rdi\Aula23\obj\Debug\net10.0\ref\Aula23.dll
 C:\Users\cgach\Projetos\rdi\Aula23\bin\Debug\net10.0\Npgsql.dll
+C:\Users\cgach\Projetos\rdi\Aula23\obj\Debug\net10.0\Aula23.sourcelink.json
