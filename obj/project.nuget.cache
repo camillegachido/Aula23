@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "J3cSNPXkhF8=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cgach\\Projetos\\rdi\\Aula23\\Aula23.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cgach\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.2\\microsoft.aspnetcore.openapi.10.0.2.nupkg.sha512",
+    "C:\\Users\\cgach\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512",
+    "C:\\Users\\cgach\\.nuget\\packages\\npgsql\\10.0.1\\npgsql.10.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
